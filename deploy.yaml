@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: maven-app
+  name: maven-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maven-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: maven-app
+    spec:
+      containers:
+      - image: asnashameel/maven-app:latest
+        name: maven-app
+        resources: {}
+status: {}

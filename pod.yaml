@@ -1,0 +1,125 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/containerID: 08d5614e8ad4980bdab27c77e83cfa7bca623caceff7c1065f4f4c8381391612
+    cni.projectcalico.org/podIP: 172.18.189.61/32
+    cni.projectcalico.org/podIPs: 172.18.189.61/32
+  creationTimestamp: "2025-04-06T10:24:19Z"
+  generateName: maven-app-6c94b668c8-
+  labels:
+    app: maven-app
+    pod-template-hash: 6c94b668c8
+  name: maven-app-6c94b668c8-r7kqs
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: maven-app-6c94b668c8
+    uid: bddb5740-4602-47fd-9da3-4260c69a2793
+  resourceVersion: "121177"
+  uid: c25f5156-ec22-4673-b544-1e62e9c3971a
+spec:
+  containers:
+  - image: asnashameel/maven-app:latest
+    imagePullPolicy: Always
+    name: maven-app
+    resources: {}
+    restartPolicy: Never
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-f6lfk
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  imagePullSecrets:
+  - name: regcred
+  nodeName: kmaster
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-f6lfk
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-04-06T10:24:19Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-04-06T10:24:19Z"
+    message: 'containers with unready status: [maven-app]'
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-04-06T10:24:19Z"
+    message: 'containers with unready status: [maven-app]'
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-04-06T10:24:19Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://398b18233a7e3c181fcb8e9c14787c25a959e8657c7399b553d986efb5482aa7
+    image: docker.io/asnashameel/maven-app:latest
+    imageID: docker.io/asnashameel/maven-app@sha256:5c645f201ee13c8320a87782ed5988e90c7c7e195a4dcd28730e272384fac17b
+    lastState:
+      terminated:
+        containerID: containerd://398b18233a7e3c181fcb8e9c14787c25a959e8657c7399b553d986efb5482aa7
+        exitCode: 0
+        finishedAt: "2025-04-06T10:25:12Z"
+        reason: Completed
+        startedAt: "2025-04-06T10:25:12Z"
+    name: maven-app
+    ready: false
+    restartCount: 3
+    started: false
+    state:
+      waiting:
+        message: back-off 40s restarting failed container=maven-app pod=maven-app-6c94b668c8-r7kqs_default(c25f5156-ec22-4673-b544-1e62e9c3971a)
+        reason: CrashLoopBackOff
+  hostIP: 192.168.38.128
+  phase: Running
+  podIP: 172.18.189.61
+  podIPs:
+  - ip: 172.18.189.61
+  qosClass: BestEffort
+  startTime: "2025-04-06T10:24:19Z"
